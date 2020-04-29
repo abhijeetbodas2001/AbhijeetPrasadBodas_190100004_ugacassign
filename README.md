@@ -1,2 +1,1 @@
-# AbhijeetPrasadBodas_190100004_ugacassign
-Assignment code for UGACweb convener position application.
+Library "mysql-connector" used in question 2 and question 3.
