@@ -9,7 +9,7 @@
 
 <br>
 <h2>Question 1</h2>
-<hr>
+
 <p>To access the login page-</p>
 <ul>
     <li>Make a folder by the name 'phplogin' inside C:\xampp\htdocs </li>
@@ -20,7 +20,7 @@
 
 <br>
 <h2>Question 2</h2>
-<hr>
+
 <p>I have used the library "mysql-connector" to access the databse.</p>
 <p>To use the script-</p>
 <ul>
@@ -32,6 +32,6 @@
 
 <br>
 <h2>Question 3</h2>
-<hr>
+
 <p>Download addjson.py and data.json files from the Question 3 folder, add the data of the user to be added to the data base, in the format as is in the data.json file.</p>
 <p>Other steps as in Question 2</p>
