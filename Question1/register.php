@@ -1,5 +1,7 @@
 <?php
-
+	
+	session_start();
+	
 	$DATABASE_HOST = 'localhost';
 	$DATABASE_USER = 'root';
 	$DATABASE_PASS = '';
@@ -10,34 +12,6 @@
 	{
 		exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 	}
-
-
-	if (!isset($_POST['username'], $_POST['password'], $_POST['email'])) 
-	{
-		exit('Please complete the registration form!');
-	}
-
-	if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) 
-	{
-		exit('Please complete the registration form');
-	}
-
-
-
-
-
-	if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-		exit('Email is not valid!');
-	}
-	if (preg_match('/[A-Za-z0-9]+/', $_POST['username']) == 0) {
-		exit('Username is not valid!');
-	}
-	if (strlen($_POST['password']) > 20 || strlen($_POST['password']) < 5) {
-		exit('Password must be between 5 and 20 characters long!');
-	}
-
-
-
 
 
 
@@ -56,7 +30,9 @@
 
 		if ($stmt->num_rows > 0) 
 		{
-			echo 'Username exists, please choose another!';
+			$register_error = "Username already exists";    
+        	$_SESSION["register_error"] = $register_error;
+        	header("location: registerForm.php");
 		} 
 		else 
 		{
@@ -65,7 +41,14 @@
 				$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 				$stmt->bind_param('sss', $_POST['username'], $password, $_POST['email']);
 				$stmt->execute();
-				echo 'You have successfully registered, you can now <a href="index.html">login</a>!';
+				
+
+
+				$_SESSION['name']= $_POST['username'];
+				$_SESSION['email']= $_POST['email'];
+				$_SESSION['loggedin'] = TRUE;
+				header("location: home.php");
+		
 			} 
 			else 
 			{
@@ -81,3 +64,5 @@
 	}
 	$con->close();
 ?>
+
+

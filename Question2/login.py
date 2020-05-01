@@ -3,27 +3,27 @@ from getpass import getpass
 
 
 
-#make db by name pythonlogin
-makedb = mysql.connector.connect(
+#make db by name pythonlogin if not present
+make_database = mysql.connector.connect(
     host="localhost",
     user="root",
     passwd=""
 )
-dbfind = makedb.cursor()
-dbfind.execute("CREATE DATABASE IF NOT EXISTS pythonlogin")
+make_database_cursor = make_database.cursor()
+make_database_cursor.execute("CREATE DATABASE IF NOT EXISTS pythonlogin")
 
 
 
-#make table by name accounts
-mydb = mysql.connector.connect(
+#make table by name accounts of not present
+current_database = mysql.connector.connect(
   host="localhost",
   user="root",
   passwd="",
   database="pythonlogin"
 )
 
-maketable = mydb.cursor()
-maketable.execute("""CREATE TABLE IF NOT EXISTS `accounts` (
+make_table = current_database.cursor()
+make_table.execute("""CREATE TABLE IF NOT EXISTS `accounts` (
 	                `id` int(11) NOT NULL AUTO_INCREMENT,
   	                `username` varchar(50) NOT NULL,
   	                `password` varchar(255) NOT NULL,
@@ -36,22 +36,22 @@ maketable.execute("""CREATE TABLE IF NOT EXISTS `accounts` (
 
 
 
-u = input('Username:')
-p = getpass(prompt='Password: ', stream=None)
+username = input('Username:')
+password = getpass(prompt='Password: ', stream=None)
 
-mycursor = mydb.cursor(prepared = True)
-qry = " SELECT * FROM accounts WHERE username = %s "
+mycursor = current_database.cursor(prepared = True)
+my_query = " SELECT * FROM accounts WHERE username = %s "
 
-mycursor.execute(qry, (u,) )
+mycursor.execute(my_query, (username,) )
 
-res = mycursor.fetchall()
+result = mycursor.fetchall()
 
-uexist= False
-pexist= False
-for x in res:
-    uexist= True;
-    if x[2].decode() == p:
-        pexist= True
+username_exists = False
+password_correct = False
+for x in result:
+    username_exists= True
+    if x[2].decode() == password:
+        password_correct= True
         print() 
         print("Login successful")
         print("Profile details-")
@@ -60,27 +60,27 @@ for x in res:
         print("Email address: "+ x[3].decode())
 
 
-if not uexist:
+if not username_exists:
     print("Username does not exist")
     ch = input("Create new account? (0/1) : ")
     ch = int(ch)
     if ch!=0:
-        un = input('Username:')
-        e= input('Email: ')
-        pn = getpass(prompt='Password: ', stream=None)
-        pnc = getpass(prompt='Re-enter password: ', stream=None)
-        if pn!=pnc:
+        new_username = input('Username:')
+        new_email = input('Email: ')
+        new_password = getpass(prompt='Password: ', stream=None)
+        new_password_reenter = getpass(prompt='Re-enter password: ', stream=None)
+        if new_password != new_password_reenter:
             print("Passwords do not match")
         else:
-            ins = "INSERT INTO accounts (username, password, email) VALUES (%s, %s, %s)"
-            val = (un, pn, e)
-            mycursor.execute(ins, val)
-            mydb.commit()
+            insert_user = "INSERT INTO accounts (username, password, email) VALUES (%s, %s, %s)"
+            new_user_details = (new_username, new_password, new_email)
+            mycursor.execute(insert_user, new_user_details)
+            current_database.commit()
             print("Registration successful")
 
 
 
-if uexist and not pexist:
+if username_exists and not password_correct:
     print("Wrong password")
 
 

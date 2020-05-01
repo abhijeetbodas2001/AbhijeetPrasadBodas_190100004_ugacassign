@@ -1,7 +1,9 @@
-<html>
+
     
 <?php
+    
 session_start();
+    
 
 $DATABASE_HOST = 'localhost';
 $DATABASE_USER = 'root';
@@ -17,14 +19,7 @@ if ( mysqli_connect_errno() )
 
 
 
-if ( !isset($_POST['username'], $_POST['password']) ) 
-{
-	exit('Please fill both the username and password fields!');
-}
-
-
-
-if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?')) 
+if ($stmt = $con->prepare('SELECT id, password, email, username FROM accounts WHERE username = ?')) 
 {
 	$stmt->bind_param('s', $_POST['username']);
 	$stmt->execute();
@@ -32,35 +27,39 @@ if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?'
     
 
     if ($stmt->num_rows > 0) {
-        $stmt->bind_result($id, $password);
+        $stmt->bind_result($id, $password, $email, $username);
         $stmt->fetch();
         
         if (password_verify($_POST['password'], $password)) 
         {
             session_regenerate_id();
             $_SESSION['loggedin'] = TRUE;
-            $_SESSION['name'] = $_POST['username'];
+            $_SESSION['email'] = $email;
+            $_SESSION['name'] = $username;
             $_SESSION['id'] = $id;
 
             header('Location: home.php');
         }
         else
         {
-            echo 'Incorrect password!';
+            $error = "Wrong password!";    
+            $_SESSION["error"] = $error;
+            header("location: index.php");
         }
 
 
     } 
     else 
     {
-        echo 'Username does not exist <br>';
-        echo 'New user? Sign up <a href="register.html">here</a> ' ;
+        $error = "Username does not exist!";
+        $_SESSION["error"] = $error;
+        header("location: index.php");
     }
 
 
 	$stmt->close();
 }
 ?>
-</html>
+
 
 

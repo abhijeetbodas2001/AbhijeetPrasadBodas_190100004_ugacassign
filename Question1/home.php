@@ -3,7 +3,7 @@
 session_start();
 
 if (!isset($_SESSION['loggedin'])) {
-	header('Location: index.html');
+	header('Location: index.php');
 	exit;
 }
 ?>
@@ -32,7 +32,9 @@ if (!isset($_SESSION['loggedin'])) {
 
 		<div>
 			<h2 class="text-center">Home Page</h2>
-			<p class="text-center">Welcome back, <?=$_SESSION['name']?>!</p>
+			<br>
+			<?php echo "<p class='text-center'>Welcome, ".$_SESSION['name']."!</p>"; ?>
+			
 		</div>
 
 

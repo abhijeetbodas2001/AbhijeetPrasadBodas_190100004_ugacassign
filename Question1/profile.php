@@ -3,9 +3,10 @@
 session_start();
 
 if (!isset($_SESSION['loggedin'])) {
-	header('Location: index.html');
+	header('Location: index.php');
 	exit;
 }
+
 $DATABASE_HOST = 'localhost';
 $DATABASE_USER = 'root';
 $DATABASE_PASS = '';
@@ -39,7 +40,7 @@ $stmt->close();
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="float-left">
 			
-				<a href="home.php"><i class="fas fa-user-circle m-3"></i>Home</a>
+				<a href="home.php"><i class="fas fa-home m-3"></i>Home</a>
 				<a href="logout.php"><i class="fas fa-sign-out-alt m-3"></i>Logout</a>
 			</div>
 		</nav>
@@ -48,14 +49,15 @@ $stmt->close();
 		<div>
 			<h2 class="text-center">Profile Page</h2>
 			<div>
-				<p class="text-center">Your account details are below:</p>
+				
 				<p class="text-center">
+					Your account details are below:
+					<br>
 					Username: <?=$_SESSION['name']?>
+					<br>
+					Email: <?=$_SESSION['email']?>
 				</p>
 
-				<p class="text-center">
-					Email: <?=$email?>
-				</p>	
 										
 			</div>
 		</div>
