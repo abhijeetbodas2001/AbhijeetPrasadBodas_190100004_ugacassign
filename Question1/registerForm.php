@@ -17,7 +17,9 @@ session_start();
 		<div class="form-group col-sm-4 mx-auto m-5">
 			<div class="m-3"><h1 class="text-center">Register</h1></div>
 			<br>
-			<form action="http://127.0.0.1/phplogin/register.php" method="post" autocomplete="off">
+
+
+			<form action="./register.php" method="post" autocomplete="off">
 				<div class="input-group mb-2">
 					<div class="input-group-prepend">
 					  <div class="input-group-text"><i class="fas fa-user"></i></div>
@@ -31,16 +33,29 @@ session_start();
 					<div class="input-group-prepend">
 					  <div class="input-group-text"><i class="fas fa-lock"></i></div>
 					</div>
-					<input type="password" pattern=".{5,20}" required title="5 to 20 characters" class="form-control" name="password" placeholder="Password" id="password" required>
+					<input type="password" class="form-control" name="password" placeholder="Password" id="password" required>
 				</div>
 
 				<br>
+
+
+
+				<div class="input-group mb-2">
+					<div class="input-group-prepend">
+					  <div class="input-group-text"><i class="fas fa-lock"></i></div>
+					</div>
+					<input type="password" class="form-control" name="password2" placeholder="Re-enter Password" id="password2" required>
+				</div>
+
+				<br>
+
+
 
 				<div class="input-group mb-2">
 					<div class="input-group-prepend">
 					  <div class="input-group-text"><i class="fas fa-envelope"></i></div>
 					</div>
-					<input type="email" class="form-control" name="email" placeholder="Email" id="email" required>
+					<input type="text" class="form-control" name="email" placeholder="Email" id="email" required>
 				</div>
 				
 				

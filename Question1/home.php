@@ -33,7 +33,19 @@ if (!isset($_SESSION['loggedin'])) {
 		<div>
 			<h2 class="text-center">Home Page</h2>
 			<br>
-			<?php echo "<p class='text-center'>Welcome, ".$_SESSION['name']."!</p>"; ?>
+			<?php 
+				if(!isset($_SESSION['is_new_register']))
+				{
+					echo "<p class='text-center'>Welcome, ".$_SESSION['name']."!</p>"; 
+				}
+				else	
+				{
+					echo "<p class='text-center'>You have been successfully registered, ".$_SESSION['name']."!</p>"; 
+				}
+					
+				unset($_SESSION['is_new_register']);
+				
+			?>
 			
 		</div>
 

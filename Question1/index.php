@@ -18,7 +18,7 @@ session_start();
 	<body>
 		<div class="form-group col-sm-4 mx-auto">
 			<div class="m-5"><h1 class="text-center">Login</h1></div>
-			<form class="form-horizontal" action="http://127.0.0.1/phplogin/authenticate.php" method="post" >
+			<form class="form-horizontal" action="./authenticate.php" method="post" >
 
 				
 				<div class="input-group mb-2">
@@ -70,7 +70,7 @@ session_start();
 
 
             <br>
-            <p class="text-center">New user? Sign up <a href="http://127.0.0.1/phplogin/registerForm.php">here</a></p>
+            <p class="text-center">New user? Sign up <a href="./registerForm.php">here</a></p>
         </div>
         
         
