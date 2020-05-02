@@ -1,4 +1,4 @@
-<h2>This repository contains my code for the assignment given as part of the selection process for the post of Web Convenor of UGAC, IIT Bombay.</h2>
+<h3>This repository contains my code for the assignment given as part of the selection process for the post of Web Convenor of UGAC, IIT Bombay.</h3>
 <p>To run the code locally,</p>
 
 <ul>
